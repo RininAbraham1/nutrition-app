@@ -1,0 +1,9 @@
+# Local environment — NEVER commit this
+.env
+
+# Build output — generated automatically by build.js / GitHub Actions
+dist/
+
+# OS junk
+.DS_Store
+Thumbs.db

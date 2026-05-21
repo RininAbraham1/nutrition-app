@@ -286,6 +286,116 @@
     /* animate in new messages */
     @keyframes msgIn { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform: translateY(0); } }
     .msg-wrap { animation: msgIn 0.2s ease; }
+
+    /* MODE TOGGLE */
+    #mode-toggle { display: none; flex-shrink: 0; background: var(--card); border-bottom: 0.5px solid var(--border); padding: 8px 14px; gap: 6px; }
+    #mode-toggle.visible { display: flex; }
+    .mode-btn { flex: 1; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--border-2); background: var(--bg); font-size: 12px; font-weight: 500; color: var(--text-2); cursor: pointer; font-family: 'DM Sans', sans-serif; display: flex; align-items: center; justify-content: center; gap: 5px; transition: all 0.15s; }
+    .mode-btn i { font-size: 14px; }
+    .mode-btn.active.log-mode { background: var(--blue-pale); border-color: var(--blue); color: var(--blue); }
+    .mode-btn.active.advice-mode { background: var(--purple-pale); border-color: var(--purple); color: var(--purple); }
+
+    /* FOOD SEARCH PICKER */
+    #food-picker { display: none; position: absolute; bottom: 0; left: 0; right: 0; z-index: 50; background: var(--card); border-top: 1px solid var(--border-2); border-radius: 20px 20px 0 0; padding: 14px 14px 24px; box-shadow: 0 -4px 24px rgba(0,0,0,0.12); max-height: 70vh; overflow-y: auto; }
+    #food-picker.open { display: block; }
+    .picker-handle { width: 36px; height: 4px; background: var(--bg-3); border-radius: 2px; margin: 0 auto 12px; }
+    .picker-title { font-size: 12px; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
+    .picker-close { width: 24px; height: 24px; border-radius: 50%; background: var(--bg-3); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-2); font-size: 12px; }
+    .picker-searching { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-3); padding: 8px 0; }
+    .food-option { display: flex; align-items: flex-start; gap: 10px; padding: 11px 12px; border-radius: 12px; border: 1px solid var(--border-2); background: var(--bg); margin-bottom: 7px; cursor: pointer; transition: all 0.15s; }
+    .food-option:active { opacity: 0.75; }
+    .food-option.selected { border-color: var(--green); background: var(--green-pale); }
+    .food-option-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--bg-3); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .food-option-info { flex: 1; min-width: 0; }
+    .food-option-name { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .food-option-brand { font-size: 11px; color: var(--text-3); margin-bottom: 4px; }
+    .food-option-macros { display: flex; gap: 8px; flex-wrap: wrap; }
+    .food-macro-pill { font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 6px; }
+    .pill-cal { background: var(--amber-pale); color: var(--amber); }
+    .pill-pro { background: var(--green-pale); color: var(--green); }
+    .pill-carb { background: #fef9ec; color: #b08a00; }
+    .pill-fat { background: #fdf0ec; color: #c0522b; }
+    @media (prefers-color-scheme: dark) {
+      .pill-carb { background: #2a2200; color: #e9c46a; }
+    }
+    .picker-confirm-btn { width: 100%; padding: 13px; border-radius: 13px; border: none; background: var(--green); color: #fff; font-size: 15px; font-weight: 500; font-family: 'DM Sans', sans-serif; cursor: pointer; margin-top: 10px; }
+    .picker-confirm-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .food-option-estimate { border-style: dashed; }
+
+    /* LOG MODE indicator in input */
+    #input-mode-badge { font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 6px; letter-spacing: 0.3px; flex-shrink: 0; align-self: flex-end; margin-bottom: 10px; }
+    #input-mode-badge.log { background: var(--blue-pale); color: var(--blue); }
+    #input-mode-badge.advice { background: var(--purple-pale); color: var(--purple); }
+    /* ── MASCOT ─────────────────────────────────────────────────── */
+    #mascot-wrap { flex-shrink: 0; background: var(--card); border-bottom: 0.5px solid var(--border); padding: 10px 16px 8px; display: none; align-items: center; gap: 10px; }
+    #mascot-wrap.visible { display: flex; }
+    .mascot-svg { flex-shrink: 0; width: 48px; height: 48px; }
+    .mascot-bubble { background: var(--green-pale); border: 1px solid var(--green-light); border-radius: 14px 14px 14px 4px; padding: 8px 12px; font-size: 12px; color: var(--text-2); line-height: 1.45; flex: 1; position: relative; animation: bubbleIn 0.3s cubic-bezier(.34,1.56,.64,1); }
+    @keyframes bubbleIn { from{opacity:0;transform:translateX(-8px) scale(0.95)} to{opacity:1;transform:none} }
+    /* mascot bounce */
+    @keyframes mascotBounce { 0%,100%{transform:translateY(0)} 40%{transform:translateY(-6px)} 60%{transform:translateY(-3px)} }
+    .mascot-svg.bounce { animation: mascotBounce 0.6s ease; }
+    /* mascot wiggle on achievement */
+    @keyframes mascotWiggle { 0%,100%{transform:rotate(0)} 20%{transform:rotate(-8deg)} 40%{transform:rotate(8deg)} 60%{transform:rotate(-5deg)} 80%{transform:rotate(4deg)} }
+    .mascot-svg.wiggle { animation: mascotWiggle 0.5s ease; }
+
+    /* ── ACHIEVEMENT TOAST ──────────────────────────────────────── */
+    #achievement-toast { position: fixed; top: 0; left: 50%; transform: translateX(-50%) translateY(-120%); max-width: 400px; width: calc(100% - 32px); z-index: 999; background: var(--card); border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.18); padding: 14px 16px; display: flex; align-items: center; gap: 12px; border: 1px solid var(--border-2); transition: transform 0.4s cubic-bezier(.34,1.56,.64,1); }
+    #achievement-toast.show { transform: translateX(-50%) translateY(16px); }
+    .toast-icon { font-size: 32px; flex-shrink: 0; }
+    .toast-info { flex: 1; }
+    .toast-title { font-size: 11px; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.5px; }
+    .toast-name { font-family: 'DM Serif Display', serif; font-size: 17px; color: var(--text); margin: 1px 0; }
+    .toast-desc { font-size: 12px; color: var(--text-2); }
+    .toast-xp { font-size: 12px; font-weight: 700; color: var(--green); background: var(--green-pale); padding: 4px 10px; border-radius: 20px; flex-shrink: 0; }
+
+    /* ── BADGES SCREEN ──────────────────────────────────────────── */
+    #badges-screen { display: none; flex: 1; flex-direction: column; overflow: hidden; }
+    #badges-screen.active { display: flex; }
+    .badges-scroll { flex: 1; overflow-y: auto; padding: 16px; }
+    .badges-xp-bar-wrap { background: var(--card); border-radius: var(--radius); border: 0.5px solid var(--border-2); padding: 16px; margin-bottom: 14px; box-shadow: var(--shadow); }
+    .badges-xp-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .badges-level { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--green); }
+    .badges-level-label { font-size: 11px; color: var(--text-3); margin-top: 2px; }
+    .badges-xp-text { font-size: 12px; color: var(--text-3); text-align: right; }
+    .xp-bar-bg { height: 8px; background: var(--bg-3); border-radius: 4px; overflow: hidden; }
+    .xp-bar-fill { height: 100%; background: linear-gradient(90deg, var(--green-mid), var(--green)); border-radius: 4px; transition: width 0.6s cubic-bezier(.34,1.56,.64,1); }
+    .badges-section-label { font-size: 11px; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.5px; margin: 14px 0 10px; }
+    .badges-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 6px; }
+    .badge-card { background: var(--card); border-radius: 14px; border: 1.5px solid var(--border-2); padding: 14px 10px; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; position: relative; overflow: hidden; }
+    .badge-card:active { transform: scale(0.96); }
+    .badge-card.earned { border-color: var(--green); background: var(--green-pale); }
+    .badge-card.earned::after { content:''; position:absolute; inset:0; background: linear-gradient(135deg, rgba(82,183,136,0.08) 0%, transparent 60%); }
+    .badge-card.locked { opacity: 0.45; filter: grayscale(0.6); }
+    .badge-emoji { font-size: 28px; line-height: 1; }
+    .badge-name { font-size: 11px; font-weight: 600; color: var(--text); line-height: 1.3; }
+    .badge-card.earned .badge-name { color: var(--green); }
+    .badge-xp { font-size: 10px; color: var(--text-3); }
+    .badge-card.earned .badge-xp { color: var(--green-mid); }
+    .badge-check { position: absolute; top: 6px; right: 6px; width: 16px; height: 16px; background: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; color: #fff; }
+
+    /* ── MISC ANIMATIONS ────────────────────────────────────────── */
+    /* Tab switch */
+    .screen.active { animation: screenIn 0.22s ease; }
+    @keyframes screenIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:none} }
+    /* Nutrition bar fill */
+    @keyframes barGrow { from{width:0} }
+    .macro-bar-fill { animation: barGrow 0.5s cubic-bezier(.34,1.56,.64,1) both; }
+    /* Water cup pop */
+    @keyframes cupPop { 0%{transform:scale(1)} 50%{transform:scale(1.3)} 100%{transform:scale(1)} }
+    .water-cup.pop { animation: cupPop 0.25s ease; }
+    /* Send button pulse */
+    @keyframes sendPulse { 0%{box-shadow:0 0 0 0 rgba(82,183,136,0.5)} 100%{box-shadow:0 0 0 12px rgba(82,183,136,0)} }
+    #send-btn:not(:disabled):active { animation: sendPulse 0.4s ease; }
+    /* Food picker card slide */
+    #food-picker.open { animation: pickerUp 0.3s cubic-bezier(.34,1.56,.64,1); }
+    @keyframes pickerUp { from{transform:translateY(40px);opacity:0} to{transform:none;opacity:1} }
+    /* Badge earn pop */
+    @keyframes badgePop { 0%{transform:scale(0.5) rotate(-10deg);opacity:0} 70%{transform:scale(1.15) rotate(3deg)} 100%{transform:scale(1) rotate(0);opacity:1} }
+    .badge-card.just-earned { animation: badgePop 0.5s cubic-bezier(.34,1.56,.64,1) both; }
+    /* Calorie ring pulse when goal hit */
+    @keyframes ringPulse { 0%,100%{filter:drop-shadow(0 0 0 transparent)} 50%{filter:drop-shadow(0 0 8px var(--green-mid))} }
+    .ring-celebrate { animation: ringPulse 0.8s ease 2; }
   </style>
 </head>
 <body>
@@ -304,7 +414,37 @@
         </div>
       </div>
     </div>
-    <!-- Nutrition Banner (calories + macros) -->
+    <!-- Mascot strip -->
+    <div id="mascot-wrap">
+      <svg class="mascot-svg" id="mascot-svg" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <!-- body -->
+        <ellipse cx="40" cy="48" rx="22" ry="20" fill="#52b788"/>
+        <!-- head -->
+        <circle cx="40" cy="28" r="18" fill="#52b788"/>
+        <!-- cheeks -->
+        <ellipse cx="28" cy="31" rx="5" ry="3.5" fill="#f08080" opacity="0.5"/>
+        <ellipse cx="52" cy="31" rx="5" ry="3.5" fill="#f08080" opacity="0.5"/>
+        <!-- eyes -->
+        <ellipse cx="33" cy="25" rx="4" ry="4.5" fill="white"/>
+        <ellipse cx="47" cy="25" rx="4" ry="4.5" fill="white"/>
+        <circle cx="34" cy="26" r="2.5" fill="#1a1a1a" id="mascot-eye-l"/>
+        <circle cx="48" cy="26" r="2.5" fill="#1a1a1a" id="mascot-eye-r"/>
+        <!-- shine -->
+        <circle cx="35" cy="25" r="1" fill="white"/>
+        <circle cx="49" cy="25" r="1" fill="white"/>
+        <!-- smile -->
+        <path id="mascot-mouth" d="M33 34 Q40 40 47 34" stroke="#1b4332" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <!-- leaf on head -->
+        <path d="M40 10 C36 4 28 6 30 12 C32 8 38 8 40 14 C42 8 48 8 50 12 C52 6 44 4 40 10Z" fill="#2d6a4f"/>
+        <!-- arms -->
+        <ellipse cx="18" cy="50" rx="6" ry="10" rx="5" fill="#52b788" transform="rotate(-20 18 50)"/>
+        <ellipse cx="62" cy="50" rx="6" ry="10" fill="#52b788" transform="rotate(20 62 50)"/>
+        <!-- legs -->
+        <ellipse cx="32" cy="66" rx="7" ry="9" fill="#40916c"/>
+        <ellipse cx="48" cy="66" rx="7" ry="9" fill="#40916c"/>
+      </svg>
+      <div class="mascot-bubble" id="mascot-bubble">Hey! Ready to crush your nutrition goals today? 🌿</div>
+    </div>
     <div id="nutrition-banner">
       <div class="nutrition-summary">
         <div class="calorie-ring-wrap">
@@ -353,10 +493,26 @@
       <div class="chip" data-meal="dinner" onclick="setMeal('dinner')"><i class="ti ti-tools-kitchen-2"></i> Dinner</div>
       <div class="chip" data-meal="snack" onclick="setMeal('snack')"><i class="ti ti-apple"></i> Snack</div>
     </div>
+    <!-- Mode toggle -->
+    <div id="mode-toggle">
+      <button class="mode-btn log-mode active" id="btn-log-mode" onclick="setMode('log')"><i class="ti ti-database"></i> Log Food</button>
+      <button class="mode-btn advice-mode" id="btn-advice-mode" onclick="setMode('advice')"><i class="ti ti-bulb"></i> Get Advice</button>
+    </div>
     <div id="messages"></div>
+    <!-- Food picker sheet -->
+    <div id="food-picker">
+      <div class="picker-handle"></div>
+      <div class="picker-title">
+        <span id="picker-title-text">Select a food</span>
+        <button class="picker-close" onclick="closePicker()"><i class="ti ti-x"></i></button>
+      </div>
+      <div id="picker-options"></div>
+      <button class="picker-confirm-btn" id="picker-confirm-btn" onclick="confirmFoodSelection()" disabled>Log Selected Food</button>
+    </div>
     <div id="input-area">
       <div id="day-actions"></div>
       <div id="input-row">
+        <div id="input-mode-badge" class="log" style="display:none">LOG</div>
         <textarea id="user-input" placeholder="Tell me what you ate..." rows="1" disabled></textarea>
         <button id="send-btn" disabled onclick="sendMessage()"><i class="ti ti-arrow-up"></i></button>
       </div>
@@ -381,12 +537,33 @@
     <div class="profile-scroll" id="profile-scroll"></div>
   </div>
 
+  <!-- BADGES SCREEN -->
+  <div class="screen" id="badges-screen">
+    <div class="screen-header">
+      <h1>Achievements</h1>
+      <p id="badges-header-sub">Earn badges as you build healthy habits</p>
+    </div>
+    <div class="badges-scroll" id="badges-scroll"></div>
+  </div>
+
   <!-- TAB BAR -->
   <div id="tab-bar">
     <button class="tab-btn active" onclick="showTab('today')"><i class="ti ti-home"></i>Today</button>
     <button class="tab-btn" onclick="showTab('history')"><i class="ti ti-calendar"></i>History</button>
+    <button class="tab-btn" onclick="showTab('badges')"><i class="ti ti-trophy"></i>Badges</button>
     <button class="tab-btn" onclick="showTab('profile')"><i class="ti ti-user"></i>Profile</button>
   </div>
+</div>
+
+<!-- ACHIEVEMENT TOAST -->
+<div id="achievement-toast">
+  <div class="toast-icon" id="toast-icon">🏆</div>
+  <div class="toast-info">
+    <div class="toast-title">Achievement Unlocked!</div>
+    <div class="toast-name" id="toast-name">First Steps</div>
+    <div class="toast-desc" id="toast-desc">You logged your first day</div>
+  </div>
+  <div class="toast-xp" id="toast-xp">+50 XP</div>
 </div>
 
 <!-- DAY DETAIL MODAL -->
@@ -459,17 +636,24 @@
   // 🔑 API KEY — paste your Groq key on the line below (line 1 of the script)
   const API_KEY = ''; // ← PASTE YOUR GROQ API KEY HERE
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  // USDA FoodData Central API key — free at https://fdc.nal.usda.gov/api-guide.html
+  // Without this key, food search uses a demo key with rate limits
+  const USDA_KEY = 'DEMO_KEY'; // ← OPTIONAL: paste your free USDA key here
 
-  const SYSTEM = `You are a friendly, knowledgeable nutrition coach in a day-tracking app. Users log meals tagged as breakfast, lunch, dinner, or snacks.
-Your job per message:
-1. Briefly acknowledge what they ate
-2. Note 1-2 nutritional wins
-3. Point out 1-2 areas to improve
-4. Give 1 actionable tip
-5. IMPORTANT: At the end of EVERY meal-related response, include a JSON block on its own line like this:
-MACROS:{"calories":450,"protein":32,"carbs":48,"fat":14,"fiber":5}
-Estimate based on typical portion sizes. If general chat (not a food log), omit the MACROS line.
-Keep the text 3-5 sentences, warm, conversational, no bullet points. Reference the user's name if known.`;
+  const LOG_SYSTEM = `You are a precise nutrition data logger. The user is logging food they ate.
+Your ONLY job is to:
+1. Confirm what was logged in 1 short sentence
+2. Output the macro line: MACROS:{"calories":N,"protein":N,"carbs":N,"fat":N,"fiber":N}
+Do NOT give advice, feedback, coaching tips, or commentary. Just log and confirm. Be brief — one sentence max.
+If the food data was already provided from a database, use those exact numbers in the MACROS line.`;
+
+  const ADVICE_SYSTEM = `You are an expert nutrition coach. The user wants nutritional analysis and advice based on their day so far.
+Do NOT log food — the user is asking for guidance, not logging a meal.
+Look at their running macros and give:
+1. Honest assessment of how they're tracking vs their goals
+2. 2-3 specific, actionable suggestions for what to eat or avoid for the rest of the day
+3. One motivating note
+Write 4-6 sentences, warm and direct. No bullet points. Reference their name if known.`;
 
   const CONCLUDE_SYSTEM = `You are a nutrition coach writing a brief end-of-day summary based on the day's meal conversation.
 Cover: what they ate overall, 2-3 wins, 2-3 areas to improve tomorrow, and whether they likely met/exceeded/missed their daily calorie goal.
@@ -479,6 +663,7 @@ On the very last line write ONLY: STATUS:met OR STATUS:exceeded OR STATUS:missed
   // ━━━ STATE ━━━
   let currentTab = 'today';
   let currentMeal = 'general';
+  let chatMode = 'log'; // 'log' | 'advice'
   let chatHistory = [];
   let todayLog = null;
   let profile = { name: '', calories: 2000, protein: 150, carbs: 200, fat: 65, fiber: 30, diet: [], water: 8 };
@@ -489,6 +674,143 @@ On the very last line write ONLY: STATUS:met OR STATUS:exceeded OR STATUS:missed
   let waterToday = 0;
   let obStep = 0;
   let obDietSelected = [];
+  // Food picker state
+  let pickerOptions = [];
+  let pickerSelected = null;
+  let pickerQueryText = '';
+
+  // ━━━ BADGES & XP ━━━
+  const BADGES = [
+    // Getting started
+    { id:'first_day',     emoji:'🌱', name:'First Steps',       desc:'Start your first day',              xp:50,  cat:'Milestones',  check: s => s.totalDays >= 1 },
+    { id:'first_conclude',emoji:'✅', name:'Day One Done',       desc:'Conclude your first day',           xp:75,  cat:'Milestones',  check: s => s.concludedDays >= 1 },
+    { id:'first_log',     emoji:'🍽️', name:'Food Logger',        desc:'Log your first meal',               xp:30,  cat:'Milestones',  check: s => s.totalMealsLogged >= 1 },
+    // Streaks
+    { id:'streak_3',      emoji:'⚡', name:'On a Roll',          desc:'3-day logging streak',              xp:100, cat:'Streaks',     check: s => s.streak >= 3 },
+    { id:'streak_7',      emoji:'🔥', name:'Week Warrior',       desc:'7-day logging streak',              xp:250, cat:'Streaks',     check: s => s.streak >= 7 },
+    { id:'streak_14',     emoji:'💥', name:'Two Week Titan',     desc:'14-day logging streak',             xp:500, cat:'Streaks',     check: s => s.streak >= 14 },
+    { id:'streak_30',     emoji:'👑', name:'Monthly Master',     desc:'30-day logging streak',             xp:1000,cat:'Streaks',     check: s => s.streak >= 30 },
+    // Nutrition goals
+    { id:'goal_met_1',    emoji:'🎯', name:'Bullseye',           desc:'Hit your calorie goal',             xp:80,  cat:'Nutrition',   check: s => s.goalMetDays >= 1 },
+    { id:'goal_met_5',    emoji:'🏹', name:'Sharp Shooter',      desc:'Hit calorie goal 5 days',           xp:200, cat:'Nutrition',   check: s => s.goalMetDays >= 5 },
+    { id:'goal_met_10',   emoji:'🎖️', name:'Precision Eater',   desc:'Hit calorie goal 10 days',          xp:400, cat:'Nutrition',   check: s => s.goalMetDays >= 10 },
+    // Protein
+    { id:'protein_hero',  emoji:'💪', name:'Protein Hero',       desc:'Log a food with 30g+ protein',      xp:60,  cat:'Nutrition',   check: s => s.maxProteinFood >= 30 },
+    { id:'protein_king',  emoji:'🦁', name:'Protein King',       desc:'Hit protein goal in a day',         xp:150, cat:'Nutrition',   check: s => s.proteinGoalDays >= 1 },
+    // Hydration
+    { id:'water_1',       emoji:'💧', name:'Hydrated',           desc:'Hit water goal for a day',          xp:50,  cat:'Hydration',   check: s => s.waterGoalDays >= 1 },
+    { id:'water_7',       emoji:'🌊', name:'Water World',        desc:'Hit water goal 7 days',             xp:200, cat:'Hydration',   check: s => s.waterGoalDays >= 7 },
+    // Variety
+    { id:'all_meals',     emoji:'🍱', name:'Full Day',           desc:'Log all 4 meal types in one day',   xp:120, cat:'Variety',     check: s => s.fullDayMealsDays >= 1 },
+    { id:'veg_lover',     emoji:'🥗', name:'Veggie Lover',       desc:'Log 5 days under calorie goal',     xp:150, cat:'Variety',     check: s => s.underGoalDays >= 5 },
+    { id:'balanced',      emoji:'⚖️', name:'Balanced',           desc:'All macros within 10% of goal',     xp:200, cat:'Variety',     check: s => s.balancedDays >= 1 },
+    // Dedication
+    { id:'days_7',        emoji:'📅', name:'Week Logger',        desc:'Log 7 total days',                  xp:150, cat:'Dedication',  check: s => s.totalDays >= 7 },
+    { id:'days_30',       emoji:'📆', name:'Month Logger',       desc:'Log 30 total days',                 xp:500, cat:'Dedication',  check: s => s.totalDays >= 30 },
+    { id:'days_100',      emoji:'💯', name:'Century Club',       desc:'Log 100 total days',                xp:2000,cat:'Dedication',  check: s => s.totalDays >= 100 },
+    // Advice
+    { id:'advice_seeker', emoji:'🧠', name:'Advice Seeker',      desc:'Use advice mode 3 times',           xp:60,  cat:'Milestones',  check: s => s.adviceUses >= 3 },
+    // Early bird / night owl
+    { id:'early_bird',    emoji:'🌅', name:'Early Bird',         desc:'Start a day before 8am',            xp:75,  cat:'Milestones',  check: s => s.earlyBirdDays >= 1 },
+  ];
+
+  // XP per level thresholds
+  function xpForLevel(lvl) { return lvl * lvl * 100; }
+  function calcLevel(xp) { let l = 1; while (xp >= xpForLevel(l+1)) l++; return l; }
+
+  function getEarnedBadges() {
+    try { return JSON.parse(localStorage.getItem('earned_badges') || '{}'); } catch(e) { return {}; }
+  }
+  function getTotalXP() { return parseInt(localStorage.getItem('total_xp') || '0'); }
+  function getAdviceUses() { return parseInt(localStorage.getItem('advice_uses') || '0'); }
+  function getEarlyBirdDays() { return parseInt(localStorage.getItem('early_bird_days') || '0'); }
+  function getMaxProteinFood() { return parseFloat(localStorage.getItem('max_protein_food') || '0'); }
+
+  function buildStats() {
+    const allKeys = getAllDayKeys();
+    const concludedKeys = allKeys.filter(k => { const l = getDayLog(k); return l && l.status === 'concluded'; });
+    const goalMetDays = concludedKeys.filter(k => { const l = getDayLog(k); return l && l.calorieStatus === 'met'; }).length;
+    const underGoalDays = concludedKeys.filter(k => { const l = getDayLog(k); return l && l.calorieStatus === 'met'; }).length;
+    const waterGoalDays = allKeys.filter(k => {
+      const w = parseInt(localStorage.getItem('water_' + k) || '0');
+      return w >= (profile.water || 8);
+    }).length;
+    const fullDayMealsDays = concludedKeys.filter(k => {
+      const l = getDayLog(k);
+      return l && l.meals && ['breakfast','lunch','dinner','snack'].every(m => l.meals[m] && l.meals[m].length > 0);
+    }).length;
+    const proteinGoalDays = concludedKeys.filter(k => {
+      const l = getDayLog(k);
+      return l && l.nutrition && l.nutrition.protein >= profile.protein;
+    }).length;
+    const balancedDays = concludedKeys.filter(k => {
+      const l = getDayLog(k);
+      if (!l || !l.nutrition) return false;
+      const n = l.nutrition;
+      return Math.abs(n.protein - profile.protein) / profile.protein < 0.1 &&
+             Math.abs(n.carbs - profile.carbs) / profile.carbs < 0.1 &&
+             Math.abs(n.fat - profile.fat) / profile.fat < 0.1;
+    }).length;
+    let totalMealsLogged = 0;
+    allKeys.forEach(k => {
+      const l = getDayLog(k);
+      if (l && l.meals) Object.values(l.meals).forEach(arr => { totalMealsLogged += arr.length; });
+    });
+    return {
+      totalDays: allKeys.length,
+      concludedDays: concludedKeys.length,
+      streak: calcStreak().current,
+      goalMetDays, underGoalDays, waterGoalDays, fullDayMealsDays,
+      proteinGoalDays, balancedDays, totalMealsLogged,
+      adviceUses: getAdviceUses(),
+      earlyBirdDays: getEarlyBirdDays(),
+      maxProteinFood: getMaxProteinFood()
+    };
+  }
+
+  function checkAndAwardBadges(delay = 0) {
+    const stats = buildStats();
+    const earned = getEarnedBadges();
+    let xp = getTotalXP();
+    const newlyEarned = [];
+    BADGES.forEach(b => {
+      if (!earned[b.id] && b.check(stats)) {
+        earned[b.id] = Date.now();
+        xp += b.xp;
+        newlyEarned.push(b);
+      }
+    });
+    if (newlyEarned.length) {
+      localStorage.setItem('earned_badges', JSON.stringify(earned));
+      localStorage.setItem('total_xp', String(xp));
+      // Show toasts in sequence
+      newlyEarned.forEach((b, i) => {
+        setTimeout(() => showAchievementToast(b), delay + i * 2200);
+      });
+      // Wiggle mascot
+      setTimeout(() => triggerMascotWiggle(), delay + 200);
+    }
+    return newlyEarned;
+  }
+
+  function showAchievementToast(badge) {
+    document.getElementById('toast-icon').textContent = badge.emoji;
+    document.getElementById('toast-name').textContent = badge.name;
+    document.getElementById('toast-desc').textContent = badge.desc;
+    document.getElementById('toast-xp').textContent = `+${badge.xp} XP`;
+    const toast = document.getElementById('achievement-toast');
+    toast.classList.add('show');
+    // Update tab badge indicator
+    updateBadgesTabDot();
+    setTimeout(() => toast.classList.remove('show'), 3500);
+  }
+
+  function updateBadgesTabDot() {
+    // flash the badges tab button
+    const btns = document.querySelectorAll('.tab-btn');
+    btns[2].style.color = 'var(--amber)';
+    setTimeout(() => { if (!btns[2].classList.contains('active')) btns[2].style.color = ''; }, 3000);
+  }
 
   const MEAL_ICONS = { breakfast: 'ti-coffee', lunch: 'ti-salad', dinner: 'ti-tools-kitchen-2', snack: 'ti-apple', general: 'ti-message' };
   const MEAL_COLORS = { breakfast: '#e9c46a', lunch: '#52b788', dinner: '#264653', snack: '#e76f51' };
@@ -582,7 +904,7 @@ On the very last line write ONLY: STATUS:met OR STATUS:exceeded OR STATUS:missed
     renderNutritionBanner();
   }
   function renderNutritionBanner() {
-    if (!todayLog || todayLog.status !== 'active') return;
+    if (!todayLog) return;
     document.getElementById('nutrition-banner').classList.add('visible');
     document.getElementById('water-bar').classList.add('visible');
     const { calories, protein, carbs, fat, fiber } = todayNutrition;
@@ -612,7 +934,14 @@ On the very last line write ONLY: STATUS:met OR STATUS:exceeded OR STATUS:missed
       const cup = document.createElement('div');
       cup.className = 'water-cup' + (i < waterToday ? ' filled' : '');
       cup.innerHTML = '<i class="ti ti-droplet" style="font-size:10px;color:' + (i < waterToday ? 'var(--blue)' : 'var(--text-3)') + '"></i>';
-      cup.onclick = () => { waterToday = (i < waterToday) ? i : i + 1; saveData(); renderWaterCups(); };
+      cup.onclick = () => {
+        waterToday = (i < waterToday) ? i : i + 1;
+        saveData();
+        renderWaterCups();
+        mascotSay('water');
+        // Check water badge
+        setTimeout(() => checkAndAwardBadges(), 400);
+      };
       el.appendChild(cup);
     }
   }
@@ -620,7 +949,128 @@ On the very last line write ONLY: STATUS:met OR STATUS:exceeded OR STATUS:missed
     if (waterToday < (profile.water || 8)) { waterToday++; saveData(); renderWaterCups(); }
   }
 
-  // ━━━ ONBOARDING ━━━
+  // ━━━ MASCOT ━━━
+  const MASCOT_MSGS = {
+    morning:  ["Good morning! Let's start strong 💪", "Rise and log! 🌅", "Morning! What's for breakfast?"],
+    afternoon:["Keep it up! You're doing great 🥗", "Afternoon check-in — stay hydrated! 💧", "Lunch time! What are we eating?"],
+    evening:  ["Evening! Don't forget dinner 🍽️", "Almost done for the day! Log your dinner 🌙", "Great evening to wrap up strong!"],
+    logged:   ["Logged! Macros updated 📊", "Nice choice! ✅", "Got it! Keep going 💪", "Tracked! Every bite counts 🎯"],
+    protein:  ["Protein power! 💪 Great macro hit!", "Love the protein choice! 🦁"],
+    water:    ["Hydration check! Nice 💧", "Water logged! Keep it up 🌊"],
+    advice:   ["Great question! Let me check your day 🧠", "Analysis mode on 🔍", "Looking at your macros..."],
+    goal_met: ["You hit your calorie goal! 🎯🔥", "Goal crushed! Amazing work today! 🏆"],
+    celebrate:["Achievement unlocked! 🏆✨", "You're on fire! 🔥", "Look at you go! 🌟"],
+  };
+
+  function mascotSay(type) {
+    const msgs = MASCOT_MSGS[type] || MASCOT_MSGS.morning;
+    const msg = msgs[Math.floor(Math.random() * msgs.length)];
+    const bubble = document.getElementById('mascot-bubble');
+    bubble.style.animation = 'none';
+    bubble.offsetHeight; // reflow
+    bubble.style.animation = '';
+    bubble.textContent = msg;
+    triggerMascotBounce();
+  }
+
+  function triggerMascotBounce() {
+    const el = document.getElementById('mascot-svg');
+    el.classList.remove('bounce', 'wiggle');
+    el.offsetHeight;
+    el.classList.add('bounce');
+    el.addEventListener('animationend', () => el.classList.remove('bounce'), { once: true });
+  }
+
+  function triggerMascotWiggle() {
+    const el = document.getElementById('mascot-svg');
+    el.classList.remove('bounce', 'wiggle');
+    el.offsetHeight;
+    el.classList.add('wiggle');
+    el.addEventListener('animationend', () => el.classList.remove('wiggle'), { once: true });
+    mascotSay('celebrate');
+  }
+
+  function showMascot() {
+    document.getElementById('mascot-wrap').classList.add('visible');
+    const h = new Date().getHours();
+    const type = h < 12 ? 'morning' : h < 17 ? 'afternoon' : 'evening';
+    mascotSay(type);
+  }
+
+  // ━━━ RENDER BADGES ━━━
+  function renderBadges() {
+    const el = document.getElementById('badges-scroll');
+    el.innerHTML = '';
+    const earned = getEarnedBadges();
+    const xp = getTotalXP();
+    const level = calcLevel(xp);
+    const nextLevelXP = xpForLevel(level + 1);
+    const prevLevelXP = xpForLevel(level);
+    const pct = Math.min((xp - prevLevelXP) / (nextLevelXP - prevLevelXP) * 100, 100);
+    const earnedCount = Object.keys(earned).length;
+
+    document.getElementById('badges-header-sub').textContent = `${earnedCount} / ${BADGES.length} earned`;
+
+    // XP bar
+    const xpCard = document.createElement('div');
+    xpCard.className = 'badges-xp-bar-wrap';
+    xpCard.innerHTML = `
+      <div class="badges-xp-top">
+        <div><div class="badges-level">Level ${level}</div><div class="badges-level-label">${getLevelTitle(level)}</div></div>
+        <div class="badges-xp-text">${xp} XP total<br><span style="color:var(--text)">${nextLevelXP - xp} XP to next</span></div>
+      </div>
+      <div class="xp-bar-bg"><div class="xp-bar-fill" style="width:${pct}%"></div></div>`;
+    el.appendChild(xpCard);
+
+    // Group by category
+    const cats = [...new Set(BADGES.map(b => b.cat))];
+    cats.forEach(cat => {
+      const label = document.createElement('div');
+      label.className = 'badges-section-label';
+      label.textContent = cat;
+      el.appendChild(label);
+      const grid = document.createElement('div');
+      grid.className = 'badges-grid';
+      BADGES.filter(b => b.cat === cat).forEach(b => {
+        const isEarned = !!earned[b.id];
+        const card = document.createElement('div');
+        card.className = `badge-card ${isEarned ? 'earned' : 'locked'}`;
+        card.title = b.desc;
+        card.innerHTML = `
+          ${isEarned ? '<div class="badge-check">✓</div>' : ''}
+          <div class="badge-emoji">${b.emoji}</div>
+          <div class="badge-name">${b.name}</div>
+          <div class="badge-xp">${isEarned ? `+${b.xp} XP earned` : `+${b.xp} XP`}</div>`;
+        card.onclick = () => showBadgeDetail(b, isEarned, earned[b.id]);
+        grid.appendChild(card);
+      });
+      el.appendChild(grid);
+    });
+  }
+
+  function getLevelTitle(lvl) {
+    const titles = ['',  'Seedling', 'Sprout', 'Sapling', 'Leaf', 'Branch',
+      'Herb', 'Garden', 'Orchard', 'Harvest', 'Forest',
+      'Nutrition Guru', 'Macro Master', 'Legend'];
+    return titles[Math.min(lvl, titles.length - 1)] || 'Legend';
+  }
+
+  function showBadgeDetail(badge, earned, earnedAt) {
+    const date = earnedAt ? new Date(earnedAt).toLocaleDateString('en-US', {month:'long',day:'numeric',year:'numeric'}) : null;
+    const content = document.getElementById('modal-content');
+    content.innerHTML = `
+      <div style="text-align:center;padding:10px 0 20px">
+        <div style="font-size:56px;margin-bottom:10px">${badge.emoji}</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:4px">${badge.name}</div>
+        <div style="font-size:13px;color:var(--text-2);margin-bottom:12px">${badge.desc}</div>
+        <div style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;background:${earned ? 'var(--green-pale)' : 'var(--bg-2)'};color:${earned ? 'var(--green)' : 'var(--text-3)'};font-size:13px;font-weight:600">
+          ${earned ? '✓ Earned' : '🔒 Locked'} · +${badge.xp} XP
+        </div>
+        ${date ? `<div style="font-size:11px;color:var(--text-3);margin-top:10px">Earned on ${date}</div>` : ''}
+        ${!earned ? `<div style="font-size:12px;color:var(--text-3);margin-top:12px;background:var(--bg-2);padding:10px;border-radius:10px">How to earn: ${badge.desc}</div>` : ''}
+      </div>`;
+    document.getElementById('modal-overlay').classList.add('open');
+  }
   const OB_STEPS = 5;
   function renderObDots(step) {
     const el = document.getElementById('onboarding-dots');
@@ -680,6 +1130,20 @@ On the very last line write ONLY: STATUS:met OR STATUS:exceeded OR STATUS:missed
     showOnboarding();
   }
 
+  // ━━━ MIDNIGHT ROLLOVER ━━━
+  // Schedule a page reload at midnight so the new day starts fresh automatically
+  function scheduleMidnightReset() {
+    const now2 = new Date();
+    const midnight = new Date(now2);
+    midnight.setHours(24, 0, 0, 0); // next midnight
+    const msUntilMidnight = midnight - now2;
+    setTimeout(() => {
+      // Reload — the new todayKey won't match any existing log, starting fresh
+      location.reload();
+    }, msUntilMidnight);
+  }
+  scheduleMidnightReset();
+
   if (todayLog) {
     restoreToday();
   } else {
@@ -703,35 +1167,203 @@ On the very last line write ONLY: STATUS:met OR STATUS:exceeded OR STATUS:missed
     const messagesEl = document.getElementById('messages');
     messagesEl.innerHTML = '';
     for (const m of (todayLog.messages || [])) addMsgDOM(m.role, m.text, m.meal);
-    if (todayLog.status === 'concluded') {
-      renderDayActions('concluded');
-      updateStatusBadge('concluded');
-    } else {
-      renderDayActions('active');
-      updateStatusBadge('active');
-      enableInput();
-      renderNutritionBanner();
-    }
+    // Always keep input enabled — concluded just means a snapshot was saved,
+    // the day resets at midnight not on button press
+    const status = todayLog.status || 'active';
+    renderDayActions(status);
+    updateStatusBadge(status);
+    enableInput();
+    renderNutritionBanner();
+    showMascot();
+    setTimeout(() => checkAndAwardBadges(), 1000);
   }
 
   // ━━━ TABS ━━━
   function showTab(tab) {
     currentTab = tab;
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.style.color = ''; });
     document.getElementById(tab + '-screen').classList.add('active');
-    const tabs = ['today','history','profile'];
+    const tabs = ['today','history','badges','profile'];
     document.querySelectorAll('.tab-btn')[tabs.indexOf(tab)].classList.add('active');
     if (tab === 'history') renderHistory();
     if (tab === 'profile') renderProfile();
+    if (tab === 'badges') renderBadges();
   }
 
   // ━━━ MEAL CHIPS ━━━
   function setMeal(meal) {
     currentMeal = meal;
     document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c.dataset.meal === meal));
-    const ph = { general:'Ask your coach anything...', breakfast:'What did you have for breakfast?', lunch:'What did you have for lunch?', dinner:'What did you have for dinner?', snack:'What did you snack on?' };
+    const ph = {
+      general: chatMode === 'advice' ? 'Ask for nutrition advice...' : 'Search or describe a food...',
+      breakfast: 'What did you have for breakfast?',
+      lunch: 'What did you have for lunch?',
+      dinner: 'What did you have for dinner?',
+      snack: 'What did you snack on?'
+    };
     document.getElementById('user-input').placeholder = ph[meal] || 'Tell me what you ate...';
+  }
+
+  // ━━━ MODE TOGGLE ━━━
+  function setMode(mode) {
+    chatMode = mode;
+    document.getElementById('btn-log-mode').classList.toggle('active', mode === 'log');
+    document.getElementById('btn-advice-mode').classList.toggle('active', mode === 'advice');
+    const badge = document.getElementById('input-mode-badge');
+    if (mode === 'log') {
+      badge.className = 'log'; badge.textContent = 'LOG'; badge.style.display = 'flex';
+      document.getElementById('user-input').placeholder = 'Search or describe a food...';
+    } else {
+      badge.className = 'advice'; badge.textContent = 'ADVICE'; badge.style.display = 'flex';
+      document.getElementById('user-input').placeholder = 'Ask for advice on your day...';
+    }
+    // Show system message hinting the mode
+    const hint = mode === 'log'
+      ? '📋 Log mode — type a food and I\'ll find it in the database or estimate macros.'
+      : '💡 Advice mode — tell me what you\'re wondering about and I\'ll coach you based on your day.';
+    addMsgDOM('system', hint);
+  }
+
+  // ━━━ USDA FOOD SEARCH ━━━
+  const FOOD_EMOJIS = {
+    chicken:'🍗', beef:'🥩', fish:'🐟', salmon:'🐟', tuna:'🐟', egg:'🥚', eggs:'🥚',
+    milk:'🥛', yogurt:'🥛', cheese:'🧀', butter:'🧈',
+    rice:'🍚', pasta:'🍝', bread:'🍞', oat:'🌾', oats:'🌾', cereal:'🌾', quinoa:'🌾',
+    apple:'🍎', banana:'🍌', orange:'🍊', berry:'🫐', berries:'🫐', grape:'🍇',
+    broccoli:'🥦', spinach:'🥬', salad:'🥗', carrot:'🥕', potato:'🥔', avocado:'🥑',
+    pizza:'🍕', burger:'🍔', sandwich:'🥪', wrap:'🌯', taco:'🌮',
+    coffee:'☕', juice:'🧃', water:'💧', soda:'🥤', smoothie:'🥤',
+    chocolate:'🍫', cookie:'🍪', cake:'🎂', ice:'🍦',
+    almond:'🥜', nuts:'🥜', peanut:'🥜', olive:'🫒',
+    default:'🍽️'
+  };
+  function foodEmoji(name) {
+    const lc = (name || '').toLowerCase();
+    for (const [key, emoji] of Object.entries(FOOD_EMOJIS)) {
+      if (lc.includes(key)) return emoji;
+    }
+    return FOOD_EMOJIS.default;
+  }
+  function getNutrient(nutrients, name) {
+    const n = nutrients.find(n => n.nutrientName && n.nutrientName.toLowerCase().includes(name.toLowerCase()));
+    return n ? Math.round(n.value || 0) : 0;
+  }
+  async function searchUSDA(query) {
+    const url = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${encodeURIComponent(query)}&pageSize=6&api_key=${USDA_KEY}`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('USDA API error');
+    return await res.json();
+  }
+  function parseFoodItem(food) {
+    const nutrients = food.foodNutrients || [];
+    return {
+      fdcId: food.fdcId,
+      name: food.description || 'Unknown food',
+      brand: food.brandOwner || food.brandName || food.dataType || '',
+      calories: getNutrient(nutrients, 'Energy'),
+      protein: getNutrient(nutrients, 'Protein'),
+      carbs: getNutrient(nutrients, 'Carbohydrate'),
+      fat: getNutrient(nutrients, 'Total lipid'),
+      fiber: getNutrient(nutrients, 'Fiber'),
+      servingSize: food.servingSize ? `${food.servingSize}${food.servingSizeUnit || 'g'}` : '100g'
+    };
+  }
+
+  // ━━━ FOOD PICKER ━━━
+  function openPicker(query, options) {
+    pickerQueryText = query;
+    pickerOptions = options;
+    pickerSelected = null;
+    document.getElementById('picker-title-text').textContent = `Results for "${query}"`;
+    document.getElementById('picker-confirm-btn').disabled = true;
+    const el = document.getElementById('picker-options');
+    el.innerHTML = '';
+    options.forEach((opt, i) => {
+      const div = document.createElement('div');
+      div.className = 'food-option' + (opt.isEstimate ? ' food-option-estimate' : '');
+      div.onclick = () => selectFoodOption(i);
+      div.id = `food-opt-${i}`;
+      const label = opt.isEstimate ? '<span style="font-size:10px;color:var(--text-3);font-style:italic"> · AI estimate</span>' : '';
+      div.innerHTML = `
+        <div class="food-option-icon">${foodEmoji(opt.name)}</div>
+        <div class="food-option-info">
+          <div class="food-option-name">${opt.name}${label}</div>
+          ${opt.brand ? `<div class="food-option-brand">${opt.brand} · per ${opt.servingSize || '100g'}</div>` : `<div class="food-option-brand">per ${opt.servingSize || '100g'}</div>`}
+          <div class="food-option-macros">
+            <span class="food-macro-pill pill-cal">${opt.calories} kcal</span>
+            <span class="food-macro-pill pill-pro">${opt.protein}g protein</span>
+            <span class="food-macro-pill pill-carb">${opt.carbs}g carbs</span>
+            <span class="food-macro-pill pill-fat">${opt.fat}g fat</span>
+          </div>
+        </div>`;
+      el.appendChild(div);
+    });
+    document.getElementById('food-picker').classList.add('open');
+  }
+  function selectFoodOption(i) {
+    pickerSelected = i;
+    document.querySelectorAll('.food-option').forEach((el, j) => el.classList.toggle('selected', j === i));
+    document.getElementById('picker-confirm-btn').disabled = false;
+  }
+  function closePicker() {
+    document.getElementById('food-picker').classList.remove('open');
+    pickerSelected = null;
+    pickerOptions = [];
+  }
+  async function confirmFoodSelection() {
+    if (pickerSelected === null) return;
+    const food = pickerOptions[pickerSelected];
+    closePicker();
+    const meal = currentMeal;
+    const logText = `${food.name}${food.brand ? ` (${food.brand})` : ''}, ${food.servingSize || '100g'}`;
+    // Add user message
+    addMsg('user', logText, meal);
+    if (todayLog && meal !== 'general') { todayLog.meals[meal].push(logText); saveData(); }
+    // Add to nutrition immediately (exact data)
+    addNutrition({ calories: food.calories, protein: food.protein, carbs: food.carbs, fat: food.fat, fiber: food.fiber });
+    // Track max protein food for badge
+    if (food.protein > getMaxProteinFood()) {
+      localStorage.setItem('max_protein_food', String(food.protein));
+    }
+    // Mascot reaction
+    if (food.protein >= 25) mascotSay('protein');
+    else mascotSay('logged');
+    // Add to chat history
+    const macroLine = `MACROS:{"calories":${food.calories},"protein":${food.protein},"carbs":${food.carbs},"fat":${food.fat},"fiber":${food.fiber}}`;
+    chatHistory.push({ role: 'user', content: `[${meal}] ${logText}` });
+    if (todayLog) { todayLog.history = chatHistory; saveData(); }
+
+    // Short AI log confirmation in LOG mode
+    showTyping();
+    if (!hasApiKey()) {
+      await new Promise(r => setTimeout(r, 400));
+      removeTyping();
+      addMsg('ai', `✓ Logged: ${food.name} — ${food.calories} kcal, ${food.protein}g protein, ${food.carbs}g carbs, ${food.fat}g fat.`);
+      return;
+    }
+    try {
+      const nameCtx = profile.name ? `The user's name is ${profile.name}. ` : '';
+      const systemMsg = nameCtx + LOG_SYSTEM;
+      const msgContent = `Food logged: ${logText}. Macros: ${food.calories} kcal, ${food.protein}g protein, ${food.carbs}g carbs, ${food.fat}g fat, ${food.fiber}g fiber. ${macroLine}`;
+      const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${API_KEY}` },
+        body: JSON.stringify({ model: 'llama-3.3-70b-versatile', max_tokens: 120,
+          messages: [{ role: 'system', content: systemMsg }, { role: 'user', content: msgContent }] })
+      });
+      const data = await res.json();
+      const reply = data.choices?.[0]?.message?.content || `✓ Logged ${food.name}.`;
+      removeTyping();
+      chatHistory.push({ role: 'assistant', content: reply });
+      if (todayLog) { todayLog.history = chatHistory; saveData(); }
+      addMsg('ai', reply);
+    } catch(e) {
+      removeTyping();
+      addMsg('ai', `✓ Logged: ${food.name} — ${food.calories} kcal, ${food.protein}g protein, ${food.carbs}g carbs, ${food.fat}g fat.`);
+    }
+    // Check badges after every food log
+    setTimeout(() => checkAndAwardBadges(400), 600);
   }
 
   // ━━━ DAY ACTIONS ━━━
@@ -742,7 +1374,8 @@ On the very last line write ONLY: STATUS:met OR STATUS:exceeded OR STATUS:missed
     } else if (status === 'active') {
       el.innerHTML = `<button class="action-btn btn-conclude" onclick="concludeDay()"><i class="ti ti-flag"></i> Conclude Day</button>`;
     } else {
-      el.innerHTML = `<button class="action-btn btn-disabled" disabled><i class="ti ti-check"></i> Day Concluded</button>`;
+      // concluded: still allow chatting, just show a soft note
+      el.innerHTML = `<button class="action-btn btn-conclude" onclick="concludeDay()"><i class="ti ti-refresh"></i> Update Summary</button>`;
     }
   }
 
@@ -756,6 +1389,11 @@ On the very last line write ONLY: STATUS:met OR STATUS:exceeded OR STATUS:missed
   function enableInput() {
     document.getElementById('user-input').disabled = false;
     document.getElementById('send-btn').disabled = false;
+    document.getElementById('mode-toggle').classList.add('visible');
+    const badge = document.getElementById('input-mode-badge');
+    badge.style.display = 'flex';
+    badge.className = chatMode === 'advice' ? 'advice' : 'log';
+    badge.textContent = chatMode === 'advice' ? 'ADVICE' : 'LOG';
   }
 
   function startDay() {
@@ -775,9 +1413,15 @@ On the very last line write ONLY: STATUS:met OR STATUS:exceeded OR STATUS:missed
     renderDayActions('active');
     updateStatusBadge('active');
     enableInput();
+    showMascot();
     renderNutritionBanner();
+    // Check early bird badge
+    if (new Date().getHours() < 8) {
+      localStorage.setItem('early_bird_days', String(getEarlyBirdDays() + 1));
+    }
     const name = profile.name ? `, ${profile.name}` : '';
-    addMsg('ai', `Day started${name}! Log everything you eat — use the chips above to tag each meal as breakfast, lunch, dinner, or a snack. Let's make it a great day 💪`);
+    addMsg('ai', `Day started${name}! Use **Log Food** mode to search the food database and log meals. Switch to **Get Advice** mode anytime to ask your coach for guidance based on your day. Let's go 💪`);
+    setTimeout(() => checkAndAwardBadges(300), 800);
   }
 
   // ━━━ MESSAGES ━━━
@@ -842,54 +1486,95 @@ On the very last line write ONLY: STATUS:met OR STATUS:exceeded OR STATUS:missed
     inputEl.value = ''; inputEl.style.height = 'auto';
     btnEl.disabled = true;
 
-    const meal = currentMeal;
-    addMsg('user', text, meal);
-    if (todayLog && meal !== 'general') { todayLog.meals[meal].push(text); saveData(); }
-    const userContent = meal !== 'general' ? `[${meal}] ${text}` : text;
-    chatHistory.push({ role: 'user', content: userContent });
-    if (todayLog) { todayLog.history = chatHistory; saveData(); }
-
-    showTyping();
-
-    if (!hasApiKey()) {
-      await new Promise(r => setTimeout(r, 800));
-      removeTyping();
-      addMsg('ai', '🔑 Add your Groq API key to the API_KEY variable at the top of the script tag to enable AI coaching.');
+    // ── ADVICE MODE ──────────────────────────────────────────────────
+    if (chatMode === 'advice') {
+      const meal = currentMeal;
+      // Track advice uses for badge
+      localStorage.setItem('advice_uses', String(getAdviceUses() + 1));
+      mascotSay('advice');
+      addMsg('user', text, meal);
+      chatHistory.push({ role: 'user', content: text });
+      if (todayLog) { todayLog.history = chatHistory; saveData(); }
+      showTyping();
+      if (!hasApiKey()) {
+        await new Promise(r => setTimeout(r, 600));
+        removeTyping();
+        addMsg('ai', '🔑 Add your Groq API key to enable AI advice.');
+        btnEl.disabled = false;
+        return;
+      }
+      try {
+        const nameCtx = profile.name ? `The user's name is ${profile.name}. ` : '';
+        const dietCtx = profile.diet.length ? `Dietary preferences: ${profile.diet.join(', ')}. ` : '';
+        const goalCtx = `Calorie goal: ${profile.calories} kcal. Protein: ${profile.protein}g, Carbs: ${profile.carbs}g, Fat: ${profile.fat}g.`;
+        const nutritionCtx = `So far today — Calories: ${Math.round(todayNutrition.calories)}, Protein: ${Math.round(todayNutrition.protein)}g, Carbs: ${Math.round(todayNutrition.carbs)}g, Fat: ${Math.round(todayNutrition.fat)}g, Fiber: ${Math.round(todayNutrition.fiber)}g. Water: ${waterToday}/${profile.water} cups.`;
+        const systemMsg = nameCtx + dietCtx + goalCtx + ' ' + nutritionCtx + '\n\n' + ADVICE_SYSTEM;
+        const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${API_KEY}` },
+          body: JSON.stringify({ model: 'llama-3.3-70b-versatile', max_tokens: 600,
+            messages: [{ role: 'system', content: systemMsg }, ...chatHistory] })
+        });
+        const data = await res.json();
+        const reply = data.choices?.[0]?.message?.content || 'Something went wrong.';
+        removeTyping();
+        chatHistory.push({ role: 'assistant', content: reply });
+        if (todayLog) { todayLog.history = chatHistory; saveData(); }
+        addMsg('ai', reply);
+      } catch(err) {
+        removeTyping();
+        addMsg('ai', 'Network error — check your connection and API key.');
+      }
       btnEl.disabled = false;
       return;
     }
 
-    try {
-      const nameCtx = profile.name ? `The user's name is ${profile.name}. ` : '';
-      const dietCtx = profile.diet.length ? `Their dietary preferences: ${profile.diet.join(', ')}. ` : '';
-      const goalCtx = `Their daily calorie goal is ${profile.calories} kcal. Protein: ${profile.protein}g, Carbs: ${profile.carbs}g, Fat: ${profile.fat}g.`;
-      const systemMsg = nameCtx + dietCtx + goalCtx + '\n\n' + SYSTEM;
+    // ── LOG MODE: search USDA then show food picker ───────────────────
+    // Show query as user bubble immediately
+    addMsgDOM('user', text, currentMeal);
+    showTyping();
 
+    try {
+      // Search USDA in parallel with AI estimate (if key available)
+      const [usdaData, estimateOption] = await Promise.all([
+        searchUSDA(text).catch(() => ({ foods: [] })),
+        hasApiKey() ? getAIEstimate(text) : Promise.resolve(makeFallbackEstimate(text))
+      ]);
+
+      const usdaResults = (usdaData.foods || []).slice(0, 4).map(parseFoodItem);
+      const allOptions = [...usdaResults, estimateOption];
+
+      removeTyping();
+      openPicker(text, allOptions);
+    } catch(err) {
+      removeTyping();
+      addMsg('ai', 'Could not search the food database. Check your connection.');
+    }
+    btnEl.disabled = false;
+  }
+
+  async function getAIEstimate(query) {
+    try {
       const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${API_KEY}` },
-        body: JSON.stringify({ model: 'llama-3.3-70b-versatile', max_tokens: 1000, messages: [{ role: 'system', content: systemMsg }, ...chatHistory] })
+        body: JSON.stringify({ model: 'llama-3.3-70b-versatile', max_tokens: 80,
+          messages: [
+            { role: 'system', content: 'You are a nutrition database. Respond ONLY with valid JSON, no other text, no markdown: {"calories":N,"protein":N,"carbs":N,"fat":N,"fiber":N} — realistic estimates for a typical single serving.' },
+            { role: 'user', content: query }
+          ] })
       });
       const data = await res.json();
-      const reply = data.choices?.[0]?.message?.content || 'Something went wrong.';
-      removeTyping();
-      chatHistory.push({ role: 'assistant', content: reply });
-      if (todayLog) { todayLog.history = chatHistory; saveData(); }
-
-      // parse MACROS if present
-      const macroMatch = reply.match(/^MACROS:(\{.*\})$/m);
-      if (macroMatch) {
-        try {
-          const macros = JSON.parse(macroMatch[1]);
-          addNutrition(macros);
-        } catch(e) {}
-      }
-      addMsg('ai', reply);
-    } catch (err) {
-      removeTyping();
-      addMsg('ai', 'Network error — check your connection and API key.');
+      const raw = (data.choices?.[0]?.message?.content || '{}').replace(/```json|```/g, '').trim();
+      const macros = JSON.parse(raw);
+      return { name: query.charAt(0).toUpperCase() + query.slice(1), brand: 'AI estimate', calories: macros.calories || 0, protein: macros.protein || 0, carbs: macros.carbs || 0, fat: macros.fat || 0, fiber: macros.fiber || 0, servingSize: '1 serving', isEstimate: true };
+    } catch(e) {
+      return makeFallbackEstimate(query);
     }
-    btnEl.disabled = false;
+  }
+
+  function makeFallbackEstimate(query) {
+    return { name: query.charAt(0).toUpperCase() + query.slice(1), brand: 'General estimate', calories: 200, protein: 8, carbs: 25, fat: 7, fiber: 2, servingSize: '1 serving', isEstimate: true };
   }
 
   // ━━━ CONCLUDE ━━━
@@ -946,11 +1631,10 @@ On the very last line write ONLY: STATUS:met OR STATUS:exceeded OR STATUS:missed
     document.getElementById('conclude-modal').classList.remove('open');
     renderDayActions('concluded');
     updateStatusBadge('concluded');
-    document.getElementById('nutrition-banner').classList.remove('visible');
-    document.getElementById('water-bar').classList.remove('visible');
-    document.getElementById('user-input').disabled = true;
-    document.getElementById('send-btn').disabled = true;
-    addMsgDOM('system', '✅ Day concluded and saved to your history.');
+    addMsgDOM('system', '✅ Day summary saved! You can keep logging — your chat resets at midnight.');
+    // Check goal badge + celebrate
+    if (concludeCalorieStatus === 'met') mascotSay('goal_met');
+    setTimeout(() => checkAndAwardBadges(500), 800);
   }
 
   // ━━━ HISTORY ━━━
